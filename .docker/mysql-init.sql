@@ -1,0 +1,7 @@
+CREATE TABLE thread
+(
+    uuid    VARCHAR(255) PRIMARY KEY,
+    topic   VARCHAR(255) NOT NULL,
+    created DATETIME DEFAULT CURRENT_TIMESTAMP,
+    comments TEXT NOT NULL
+);

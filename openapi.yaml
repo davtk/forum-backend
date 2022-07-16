@@ -1,0 +1,150 @@
+openapi: 3.0.0
+info:
+  title: 'Davtk / Forum - Backend'
+  contact:
+    name: 'Daniel Vitek'
+    url: 'https://www.linkedin.com/in/daniel-vitek/'
+    email: kontakt@danielvitek.me
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  '/threads/{uuid}':
+    get:
+      tags:
+        - threads
+      summary: 'Get single thread'
+      operationId: getThread
+      parameters:
+        -
+          name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'List of threads'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Thread_Detail'
+    post:
+      tags:
+        - threads
+      summary: 'Comment on thread'
+      operationId: commentThread
+      parameters:
+        -
+          name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment_Create'
+      responses:
+        '200':
+          description: 'Created thread'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Thread_Detail'
+  /threads:
+    get:
+      tags:
+        - threads
+      operationId: getThreads
+      responses:
+        '200':
+          description: 'List of threads'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Thread_Detail'
+    post:
+      tags:
+        - threads
+      operationId: createThread
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Thread_Create'
+      responses:
+        '200':
+          description: 'Created thread'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Thread_Detail'
+components:
+  schemas:
+    Comment_Create:
+      properties:
+        nickname:
+          type: string
+        email:
+          type: string
+        message:
+          type: string
+      type: object
+    Thread_Create:
+      properties:
+        topic:
+          type: string
+        nickname:
+          type: string
+        email:
+          type: string
+        message:
+          type: string
+      type: object
+    Comment_Detail:
+      properties:
+        uuid:
+          type: string
+          nullable: false
+        nickname:
+          type: string
+          nullable: false
+        avatar_link:
+          type: string
+          nullable: false
+        email:
+          type: string
+          nullable: false
+        message:
+          type: string
+          nullable: false
+        posted:
+          type: string
+          nullable: false
+      type: object
+    Thread_Detail:
+      properties:
+        uuid:
+          type: string
+          nullable: false
+        topic:
+          type: string
+          nullable: false
+        created:
+          type: string
+          nullable: false
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment_Detail'
+          nullable: false
+      type: object

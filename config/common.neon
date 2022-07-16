@@ -4,7 +4,7 @@ parameters:
 application:
 	errorPresenter: Error
 	mapping:
-		*: App\*Module\Presenters\*Presenter
+		*: Davtk\Forum\Infrastructure\Nette\Presenters\*Presenter
 
 
 session:

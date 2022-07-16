@@ -1,0 +1,5 @@
+parameters:
+    db_name: %env.FORUM_DB_DBNAME%
+    db_host: %env.FORUM_DB_HOST%
+    db_user: %env.FORUM_DB_USER%
+    db_pwd: %env.FORUM_DB_PWD%

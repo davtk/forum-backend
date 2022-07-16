@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  database:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: DhjNehWfHTtUeFwhhUdf
+      MYSQL_DATABASE: davtk_forum
+      MYSQL_USER: udavtk_forum
+      MYSQL_PASSWORD: WJYPxadKUvXAVXDZFARk
+    volumes:
+      - "./.docker/mysql-init.sql:/docker-entrypoint-initdb.d/1.sql"
+    ports:
+      - "3308:3306"
+
+  application:
+    build:
+      context: '.'
+      dockerfile: Dockerfile
+    environment:
+      FORUM_DB_DBNAME: davtk_forum
+      FORUM_DB_HOST: database
+      FORUM_DB_USER: udavtk_forum
+      FORUM_DB_PWD: WJYPxadKUvXAVXDZFARk
+    ports:
+      - "8088:80"
+    depends_on:
+      - database

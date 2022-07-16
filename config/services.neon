@@ -1,2 +1,29 @@
 services:
-	- App\Router\RouterFactory::createRouter
+    - Davtk\Forum\Infrastructure\Nette\Router\RouterFactory::createRouter
+    - Davtk\Forum\Infrastructure\Nette\TemplateFactory
+
+    #
+    # Application
+    #
+    - Davtk\Forum\Application\ForumFacade
+
+    #
+    # Infrastructure
+    #
+
+    # Persistence / Sqlite
+    dbconnection: PDO('mysql:host=%db_host%;dbname=%db_name%', '%db_user%', '%db_pwd%')
+
+    - Davtk\Forum\Infrastructure\Persistence\Mysql\ThreadFactory
+    persistence.database:
+        factory: Davtk\Forum\Infrastructure\Persistence\Mysql\ThreadRepository(@dbconnection)
+        autowired: Davtk\Forum\Domain\Threads\ThreadRepository # Switch default persistence by moving autowired to another service
+
+    # DateTime
+    - Davtk\Forum\Infrastructure\DateTime\CurrentDateTime
+
+    # Uuid
+    - Davtk\Forum\Infrastructure\Uuid\RamseyUuidV4
+
+    # Avatar
+    - Davtk\Forum\Infrastructure\Avatar\GravatarProvider
