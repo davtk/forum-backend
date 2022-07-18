@@ -28,19 +28,26 @@ So the technologies:
 
 # How it works
 
-1. **src/Davtk/Forum/Domain** contains business logic of the application,
-2. **src/Davtk/Forum/Application** gives you use cases what can you do with the application,
-3. **src/Davtk/Forum/Infrastructure** contains adapters - both driving & driven side
+1. `src/Davtk/Forum/Domain` contains business logic of the application,
+2. `src/Davtk/Forum/Application` gives you use cases what can you do with the application,
+3. `src/Davtk/Forum/Infrastructure` contains adapters - both driving & driven side
 
-In current scenario, the driving side is REST API implemented with Nette Presenters (/src/Davtk/Forum/Infrastructure/Nette).
+In current scenario, the driving side is REST API implemented with Nette Presenters (`/src/Davtk/Forum/Infrastructure/Nette`).
 
 # Online demo?
 
-// TODO: Coming soon
+## https://davtk-forum-h2ah9.ondigitalocean.app/api
+
+CORS enabled. You can connect here from your localhost. Be nice please.
 
 # Can I run it locally?
 
-Sure thing. // TODO: I will tell you how.
+Sure thing, `docker-compose` or `docker build`.
+
+If you go with `docker build`:
+- database init script is in `.docker` folder,
+- set following env vars for connection info: `FORUM_DB_DBNAME`, `FORUM_DB_HOST`, `FORUM_DB_USER`, `FORUM_DB_PWD`,
+- publish port 80
 
 # You like it?
 
